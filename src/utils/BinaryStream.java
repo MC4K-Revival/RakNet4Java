@@ -35,7 +35,7 @@ public class BinaryStream {
 	public byte[] data;
 	public int pos;
 
-	public BinaryStream(byte[] data = new byte[], int pos = 0) {
+	public BinaryStream(byte[] data, int pos) {
 		this.data = data;
 		this.pos = pos;
 	}
