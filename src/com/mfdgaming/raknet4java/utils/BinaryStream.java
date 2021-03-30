@@ -60,10 +60,10 @@ public class BinaryStream
 	public int readIntLE()
 	{
 		byte[] temp = this.read(4);
-		int result = temp[0];
-		result |= (temp[1] << 8);
-		result |= (temp[2] << 16);
-		result |= (temp[3] << 24);
+		int result = (temp[0] & 0xff);
+		result |= ((temp[1] & 0xff) << 8);
+		result |= ((temp[2] & 0xff) << 16);
+		result |= ((temp[3] & 0xff) << 24);
 		return result;
 	}
 	
@@ -75,10 +75,10 @@ public class BinaryStream
 	public void writeIntLE(int value)
 	{
 		byte[] temp = new byte[4];
-		temp[0] = (byte) (value & 0xff);
-		temp[1] = (byte) ((value >> 8) & 0xff);
-		temp[2] = (byte) ((value >> 16) & 0xff);
-		temp[3] = (byte) ((value >> 24) & 0xff);
+		temp[0] = (byte) value;
+		temp[1] = (byte) (value >>> 8);
+		temp[2] = (byte) (value >>> 16);
+		temp[3] = (byte) (value >>> 24);
 		this.write(temp);
 	}
 	
