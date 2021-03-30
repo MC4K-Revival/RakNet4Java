@@ -57,6 +57,48 @@ public class BinaryStream
 		this.write(temp);
 	}
 	
+	public int readShortLE()
+	{
+		byte[] temp = this.read(2);
+		int result = (temp[0] & 0xff);
+		result |= ((temp[1] & 0xff) << 8);
+		return result;
+	}
+	
+	public int readUShortLE()
+	{
+		return (this.readShortLE() & 0xffff);
+	}
+	
+	public void writeShortLE(int value)
+	{
+		byte[] temp = new byte[2];
+		temp[0] = (byte) value;
+		temp[1] = (byte) (value >>> 8);
+		this.write(temp);
+	}
+	
+	public int readShortBE()
+	{
+		byte[] temp = this.read(2);
+		int result = (temp[3] & 0xff);
+		result |= ((temp[2] & 0xff) << 8);
+		return result;
+	}
+	
+	public int readUShortBE()
+	{
+		return (this.readIntBE() & 0xffff);
+	}
+	
+	public void writeIntBE(int value)
+	{
+		byte[] temp = new byte[2];
+		temp[3] = (byte) value;
+		temp[2] = (byte) (value >>> 8);
+		this.write(temp);
+	}
+	
 	public int readIntLE()
 	{
 		byte[] temp = this.read(4);
