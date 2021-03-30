@@ -45,6 +45,11 @@ public class BinaryStream
 		return this.read(1)[0];
 	}
 	
+	public int readUnsignedByte()
+	{
+		return this.readByte() & 0xff;
+	}
+	
 	public void writeByte(int value)
 	{
 		byte[] temp = new byte[1];
