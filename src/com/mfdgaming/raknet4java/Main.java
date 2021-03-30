@@ -7,8 +7,9 @@ public class Main
 	public static void main(String[] args)
 	{
 		BinaryStream stream = new BinaryStream(new byte[0], 0);
-		stream.writeByte(1);
-		stream.writeByte(255);
-		System.out.println(stream.data[1]);
+		stream.writeIntLE(1);
+		stream.writeIntLE(255);
+		System.out.println(stream.readIntLE());
+		System.out.println(stream.readIntLE());
 	}
 }
