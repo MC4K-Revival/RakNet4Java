@@ -45,7 +45,7 @@ public class BinaryStream
 		return this.read(1)[0];
 	}
 	
-	public int readUnsignedByte()
+	public int readUByte()
 	{
 		return this.readByte() & 0xff;
 	}
@@ -54,6 +54,56 @@ public class BinaryStream
 	{
 		byte[] temp = new byte[1];
 		temp[0] = (byte) value;
+		this.write(temp);
+	}
+	
+	public int readIntLE()
+	{
+		byte[] temp = this.read(4);
+		int result = temp[0];
+		result |= temp[1] << 8;
+		result |= temp[2] << 16;
+		result |= temp[3] << 24;
+		return result;
+	}
+	
+	public int readUIntLE()
+	{
+		return this.readIntLE() & 0xffffffff;
+	}
+	
+	public void writeIntLE(int value)
+	{
+		byte[] temp = new byte[4];
+		temp[0] = (byte) value & 0xff;
+		temp[1] = (byte) (value >> 8) & 0xff;
+		temp[2] = (byte) (value >> 16) & 0xff;
+		temp[3] = (byte) (value >> 24) & 0xff;
+		this.write(temp);
+	}
+	
+	public int readIntBE()
+	{
+		byte[] temp = this.read(4);
+		int result = temp[3];
+		result |= temp[2] << 8;
+		result |= temp[1] << 16;
+		result |= temp[0] << 24;
+		return result;
+	}
+	
+	public int readUIntBE()
+	{
+		return this.readIntBE() & 0xffffffff;
+	}
+	
+	public void writeIntBE(int value)
+	{
+		byte[] temp = new byte[4];
+		temp[3] = (byte) value & 0xff;
+		temp[2] = (byte) (value >> 8) & 0xff;
+		temp[1] = (byte) (value >> 16) & 0xff;
+		temp[0] = (byte) (value >> 24) & 0xff;
 		this.write(temp);
 	}
 }
